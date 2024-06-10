@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-09T11:41:43.674Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="6_W6YuozBr4jW2oifKNd" version="24.5.2" type="device">
+<mxfile host="app.diagrams.net" modified="2024-06-09T15:02:56.744Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="BO-wFqq-JVN7_5HYkfdn" version="24.5.2" type="device" pages="4">
   <diagram name="interactions with server" id="yElJ_G6i6lc_XACNIxVl">
     <mxGraphModel dx="890" dy="413" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -100,6 +100,111 @@
           <mxGeometry x="-0.0777" y="-2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fYVsl27ztwUdMxT1VWd9" name="new message">
+    <mxGraphModel dx="890" dy="413" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mAjHT0YQlS23GM5r045d-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mAjHT0YQlS23GM5r045d-1" target="mAjHT0YQlS23GM5r045d-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-1" value="Start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="155" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mAjHT0YQlS23GM5r045d-2" target="mAjHT0YQlS23GM5r045d-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-2" value="new mssg received" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mAjHT0YQlS23GM5r045d-4" target="mAjHT0YQlS23GM5r045d-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-4" value="- create topic if not there&lt;div&gt;- directory for that topic&lt;/div&gt;&lt;div&gt;- update in list of topics&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="150" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mAjHT0YQlS23GM5r045d-6" target="mAjHT0YQlS23GM5r045d-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-6" value="- get curr list of subscription IDs subscribed to that topic&lt;div&gt;- associate these subIDs to this message (inko deliver karna hai yeh mssg&lt;/div&gt;&lt;div&gt;- persist the mssg on hdd&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="740" y="147.5" width="400" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="mAjHT0YQlS23GM5r045d-8" value="send back ACK to producer" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="140" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="CqQ82wCVbZkZDhMeW7iX" name="new subscription request">
+    <mxGraphModel dx="737" dy="342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Dc0OmkHzBf-mpgUnQWhL-1" target="Dc0OmkHzBf-mpgUnQWhL-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-1" value="new subn request" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="160" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Dc0OmkHzBf-mpgUnQWhL-2" target="Dc0OmkHzBf-mpgUnQWhL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-2" value="generate uniq Id for this subscription" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Dc0OmkHzBf-mpgUnQWhL-4" target="Dc0OmkHzBf-mpgUnQWhL-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-4" value="add this id to list of open subns for this topic" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Dc0OmkHzBf-mpgUnQWhL-6" value="send back ack with uniq subn id" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7EnFdLX_-1kNigaahEck" name="new pull request">
+    <mxGraphModel dx="737" dy="342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="j6mrsIJtKl3RyrBnPJSn-1" target="j6mrsIJtKl3RyrBnPJSn-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-1" value="new pull request" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="190" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="j6mrsIJtKl3RyrBnPJSn-4" target="j6mrsIJtKl3RyrBnPJSn-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-4" value="subID should be valid" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="j6mrsIJtKl3RyrBnPJSn-6" target="j6mrsIJtKl3RyrBnPJSn-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-6" value="fetch all messages which have this subId associated with them but not yet delivered" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="j6mrsIJtKl3RyrBnPJSn-8" target="j6mrsIJtKl3RyrBnPJSn-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-8" value="send to subscriber" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="j6mrsIJtKl3RyrBnPJSn-10" target="j6mrsIJtKl3RyrBnPJSn-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-10" value="if successful ACK from subscriber, mark these messages as delivered to this subscription" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="105" y="450" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6mrsIJtKl3RyrBnPJSn-12" value="if all subscriptoins of a message have been delivered, delete that message." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="460" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
