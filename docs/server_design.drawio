@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-10T13:32:31.135Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="Gt0ic52B2AyO1e6Z5z-c" version="24.5.2" type="device" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-06-11T10:00:34.040Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="XpezVcrLT_rD3tSUd6_s" version="24.5.2" type="device" pages="5">
   <diagram name="interactions with server" id="yElJ_G6i6lc_XACNIxVl">
     <mxGraphModel dx="890" dy="413" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -205,6 +205,80 @@
         </mxCell>
         <mxCell id="j6mrsIJtKl3RyrBnPJSn-12" value="if all subscriptoins of a message have been delivered, delete that message." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="320" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="KJHXEj1Iq7xBSi0z-g2U" name="data structures">
+    <mxGraphModel dx="858" dy="342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-2" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Topics list&lt;/h1&gt;&lt;p&gt;- list of topics to be synced with filesystem&lt;/p&gt;&lt;p&gt;- unoredred_map from topic name to number of messages in that topic.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="90" y="130" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-3" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;messages/subscriptions&lt;/h1&gt;&lt;p&gt;- nested hashmap. first index is the topic&lt;/p&gt;&lt;p&gt;- each topic points to another hashmap&lt;/p&gt;&lt;p&gt;- this hashmap contains subID as key&lt;/p&gt;&lt;p&gt;- the value is unoredered_set containing messageIDs to be delivered to this subID&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="390" y="130" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-4" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;sub count for each mssg&lt;/span&gt;&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;- also maintain a topic-wise unordered_map of messageIDs. value is the number of subIDs left to deliver to. Needed for removal of messages from hdd&lt;/span&gt;&lt;br&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="827" y="130" width="353" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-5" target="-2zDn5gDx5XL_snHI2vU-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-5" value="new message" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="390" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-6" target="-2zDn5gDx5XL_snHI2vU-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-6" value="- if topic there, incresase its mssg count&lt;div&gt;- if new topic, create it with one mssg count&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="500" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-8" target="-2zDn5gDx5XL_snHI2vU-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-8" value="- if no sub for this topic, delete this mssg&lt;div&gt;- else, add this mssgID to all the current subIDs of this topic&lt;/div&gt;&lt;div&gt;- set the count of subID to deliver this mssg to as the current length of subscritpios for this topic&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="590" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-10" value="save mssg to hdd" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="700" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-12" target="-2zDn5gDx5XL_snHI2vU-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-12" value="new sub" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="390" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-13" value="- create new subID&lt;div&gt;- add it to hashmap of subID for this topic, along with an empty set for mssgIDs for this sub&amp;nbsp;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="550" width="210" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-16" target="-2zDn5gDx5XL_snHI2vU-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-16" value="new pull request" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="390" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-17" target="-2zDn5gDx5XL_snHI2vU-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-17" value="fetch and send all mssgs from given subID" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="530" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-19" target="-2zDn5gDx5XL_snHI2vU-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-19" value="if ACK:&lt;div&gt;- decrement subcount for each mssg in this subID&lt;/div&gt;&lt;div&gt;- clear this set of mssgID from this subID&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="732.5" y="670" width="215" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-2zDn5gDx5XL_snHI2vU-21" target="-2zDn5gDx5XL_snHI2vU-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-21" value="if subcount for some mssgID becomes 0:&lt;div&gt;- mark that message for deletion from hdd&lt;/div&gt;&lt;div&gt;- decrement mssg counter for corresponding topic&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="670" width="227.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-2zDn5gDx5XL_snHI2vU-23" value="if mssg count for a topic becomes zero:&lt;div&gt;- either delete it now, or mark for lazy deletion. (careful: 2 lazy deletions there)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="500" width="227.5" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
