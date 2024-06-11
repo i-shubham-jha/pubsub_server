@@ -1,5 +1,5 @@
-# this file also comiles the tests written in tests/ directory
-# supply external variable
+# this file also comiles the tests written in tests/ directory,
+# supply external variable as "cmake -DBUILD_TESTS=ON .."
 cmake_minimum_required(VERSION 3.29)
 
 set(CMAKE_CXX_STANDARD 20)
