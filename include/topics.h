@@ -1,3 +1,5 @@
+#pragma once
+
 // Topics is a separate class with helper functions
 #include <string>
 #include <unordered_map>

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "spdlog/spdlog.h"
 
 #define WARN_LOG spdlog::warn
