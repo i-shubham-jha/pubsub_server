@@ -4,10 +4,12 @@
 
 namespace fs = std::filesystem;
 
-// Default constructor
-// inits the topics_directory var with the directory where
-// topics and mssgs should be stored.
-// Also creates the holding directory for topics and mssgs on hdd.
+/*
+ * Default constructor
+ * inits the topics_directory var with the directory where
+ * topics and mssgs should be stored.
+ * Also creates the holding directory for topics and mssgs on hdd.
+ */
 Topics::Topics(std::string const topics_directory)
 {
     this->topics_directory = topics_directory;
@@ -21,22 +23,26 @@ Topics::Topics(std::string const topics_directory)
     INFO_LOG("Topics object init done");
 }
 
-// function to find whether the given topic exists in the ds or not
+/*
+ *function to find whether the given topic exists in the ds or not
+ */
 inline bool Topics::exists(std::string const topic)
 {
     return topics.find(topic) != topics.end();
 }
 
-// function to create a new topic
-// also creates the directory for this new topic
+/*
+ * function to create a new topic
+ * also creates the directory for this new topic
+ */
 void Topics::create_topic(std::string const topic)
 {
     if (!exists(topic))
     {
-        // inserting into map
+        /* inserting into map */
         topics.insert({topic, 0});
 
-        // creating directory for this topic
+        /* creating directory for this topic */
         fs::path path = (topics_directory + "/" + topic);
         if (!fs::exists(path))
         {
@@ -55,15 +61,17 @@ void Topics::create_topic(std::string const topic)
     }
 }
 
-// function to delete a topic.
-// removes the associated directory as well if second arg is true.
+/*
+ * function to delete a topic.
+ * removes the associated directory as well if second arg is true.
+ */
 void Topics::delete_topic(std::string const topic, bool const delete_directory)
 {
     if (exists(topic))
     {
         topics.erase(topic);
 
-        // deleting the entire topics directory
+        /* deleting the entire topics directory */
         if (delete_directory)
         {
             fs::path path = (topics_directory + "/" + topic);
@@ -80,7 +88,9 @@ void Topics::delete_topic(std::string const topic, bool const delete_directory)
     }
 }
 
-// increments the counter of messages for this topic by 1
+/*
+ * increments the counter of messages for this topic by 1
+ */
 void Topics::increment_mssg_cnt(std::string const topic)
 {
     if (exists(topic))
@@ -93,7 +103,9 @@ void Topics::increment_mssg_cnt(std::string const topic)
     }
 }
 
-// decrements the counter of messages for this topic by 1
+/*
+ * decrements the counter of messages for this topic by 1
+ */
 void Topics::decrement_mssg_cnt(std::string const topic)
 {
     if (exists(topic))
@@ -113,9 +125,11 @@ void Topics::decrement_mssg_cnt(std::string const topic)
     }
 }
 
-// returns count of messages for this topic.
-// returns 0 even if topics DNE. Ideally check if topic
-// exists before callling this function.
+/*
+ * returns count of messages for this topic.
+ * returns 0 even if topics DNE. Ideally check if topic
+ * exists before callling this function.
+ */
 unsigned Topics::get_mssg_cnt(std::string const topic)
 {
     if (exists(topic))
