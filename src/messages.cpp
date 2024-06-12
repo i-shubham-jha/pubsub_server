@@ -69,6 +69,7 @@ uint64_t Messages::new_message(std::string const topic, std::string const mssg)
     /* uniq mssgID. Increment after assigning to current mssg */
     uint64_t mssgID = uniq_id;
     uniq_id++;
+    messages[topic].insert({mssgID, 0});
 
     /* persist on hdd */
     std::string file_path = topics_directory + "/" + topic + "/" + std::to_string(mssgID) + ".txt";
