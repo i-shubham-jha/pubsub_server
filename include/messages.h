@@ -25,18 +25,18 @@ class Messages
      */
     uint64_t uniq_id;
 
-  public:
-    /* constructor with topics topics_directory */
-    Messages(std::string const topics_directory);
+    /* function to register a new topic in this ds */
+    void new_topic(std::string const topic);
 
     /* function to check if the topic exists in this ds */
     bool exists_topic(std::string const topic);
 
+  public:
+    /* constructor with topics topics_directory */
+    Messages(std::string const topics_directory);
+
     /* function to check if {topic, mssgID} tuple exists or not */
     bool exists_mssg(std::string const topic, uint64_t const mssgID);
-
-    /* function to register a new topic in this ds */
-    void new_topic(std::string const topic);
 
     /* new message. returns mssgID */
     uint64_t new_message(std::string const topic, std::string const mssg);

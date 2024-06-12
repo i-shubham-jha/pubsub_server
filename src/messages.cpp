@@ -75,7 +75,10 @@ uint64_t Messages::new_message(std::string const topic, std::string const mssg)
 
     std::ofstream fout(file_path, std::fstream::out);
 
-    /* cannot persist mssg on hdd, purpose defeated */
+    /* If cannot persist mssg on hdd, purpose defeated
+     * might happen if holding directory for this topic
+     * has not been created by using Topics class.
+     */
     if (!fout.is_open())
     {
         CRITIAL_LOG("Cannot open file {}. Exiting...", file_path);
