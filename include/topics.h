@@ -8,13 +8,14 @@
 // This class maintains a map from the topic name to the number of
 // messages currently there in the system for that topic.
 // See cpp file for description of functions
+// topics_directory should be the same supplied to Messages obj
 class Topics
 {
     std::unordered_map<std::string, unsigned> topics;
     std::string topics_directory;
 
   public:
-    Topics();
+    Topics(std::string const topics_directory);
 
     // checks if a topic there or not
     inline bool exists(std::string const topic);
