@@ -5,14 +5,14 @@
 #include <string>
 #include <unordered_map>
 /*
- * encapsulation for ds holding mssgID per topic and
- * each mssgID's count of subcriptions left to deliver
+ * encapsulation for ds holding msgID per topic and
+ * each msgID's count of subcriptions left to deliver
  * to, and related functions.
  * DS is a map from topic names to another map, which
- * goes from mssgID to count of subcriptions left to
+ * goes from msgID to count of subcriptions left to
  * deliver to.
  * topics_directory should be the same supplied to Topics obj
- * mssgID is unint64_t
+ * msgID is unint64_t
  */
 class Messages
 {
@@ -35,18 +35,18 @@ class Messages
     /* constructor with topics topics_directory */
     Messages(std::string const topics_directory);
 
-    /* function to check if {topic, mssgID} tuple exists or not */
-    bool exists_mssg(std::string const topic, uint64_t const mssgID);
+    /* function to check if {topic, msgID} tuple exists or not */
+    bool exists_mssg(std::string const topic, uint64_t const msgID);
 
-    /* new message. returns mssgID */
+    /* new message. returns msgID */
     uint64_t new_message(std::string const topic, std::string const mssg);
 
     /* increment sub cnt by x */
-    void increment_sub_cnt(std::string topic, uint64_t const mssgID, unsigned x);
+    void increment_sub_cnt(std::string topic, uint64_t const msgID, unsigned x);
 
     /* decrement sub cnt */
-    void decrement_sub_cnt(std::string topic, uint64_t const mssgID);
+    void decrement_sub_cnt(std::string topic, uint64_t const msgID);
 
-    /* delete this mssgID */
-    void delete_mssg(std::string const topic, uint64_t const mssgID);
+    /* delete this msgID */
+    void delete_mssg(std::string const topic, uint64_t const msgID);
 };

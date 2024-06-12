@@ -24,11 +24,11 @@ bool Messages::exists_topic(std::string const topic)
 }
 
 /*
- * check if this {topic, mssgID} tuple exists or not
+ * check if this {topic, msgID} tuple exists or not
  */
-bool Messages::exists_mssg(std::string const topic, uint64_t const mssgID)
+bool Messages::exists_mssg(std::string const topic, uint64_t const msgID)
 {
-    return (exists_topic(topic) && messages[topic].find(mssgID) != messages[topic].end());
+    return (exists_topic(topic) && messages[topic].find(msgID) != messages[topic].end());
 }
 
 /*
@@ -41,7 +41,7 @@ void Messages::new_topic(std::string const topic)
     /* don't create topic if already there */
     if (!exists_topic(topic))
     {
-        /* insert this topic with emtpy mssgID container */
+        /* insert this topic with emtpy msgID container */
         messages.insert({topic, {}});
         INFO_LOG("Added new topic {}", topic);
     }
@@ -53,8 +53,8 @@ void Messages::new_topic(std::string const topic)
 
 /*
  * function to receive a new mssg published to a topic,
- * persist it on hdd, assign a uniq mssgID to this mssg,
- * and return this mssgID.
+ * persist it on hdd, assign a uniq msgID to this mssg,
+ * and return this msgID.
  * Assumes that the directory on hdd has been created
  * by calling the Topics obj.
  */
@@ -66,13 +66,13 @@ uint64_t Messages::new_message(std::string const topic, std::string const mssg)
         new_topic(topic);
     }
 
-    /* uniq mssgID. Increment after assigning to current mssg */
-    uint64_t mssgID = uniq_id;
+    /* uniq msgID. Increment after assigning to current mssg */
+    uint64_t msgID = uniq_id;
     uniq_id++;
-    messages[topic].insert({mssgID, 0});
+    messages[topic].insert({msgID, 0});
 
     /* persist on hdd */
-    std::string file_path = topics_directory + "/" + topic + "/" + std::to_string(mssgID) + ".txt";
+    std::string file_path = topics_directory + "/" + topic + "/" + std::to_string(msgID) + ".txt";
 
     std::ofstream fout(file_path, std::fstream::out);
 
@@ -91,26 +91,26 @@ uint64_t Messages::new_message(std::string const topic, std::string const mssg)
     }
     fout.close();
 
-    return mssgID;
+    return msgID;
 }
 
 /*
  * increment sub cnt by x
- * receives mssgID only
+ * receives msgID only
  */
-void Messages::increment_sub_cnt(std::string topic, uint64_t const mssgID, unsigned x)
+void Messages::increment_sub_cnt(std::string topic, uint64_t const msgID, unsigned x)
 {
     /* check if topic there or not */
     if (exists_topic(topic))
     {
-        /* check if mssgID there or not */
-        if (exists_mssg(topic, mssgID))
+        /* check if msgID there or not */
+        if (exists_mssg(topic, msgID))
         {
-            messages[topic][mssgID] += x;
+            messages[topic][msgID] += x;
         }
         else
         {
-            WARN_LOG("No {} mssgID for {} topic", mssgID, topic);
+            WARN_LOG("No {} msgID for {} topic", msgID, topic);
         }
     }
     else
@@ -121,21 +121,21 @@ void Messages::increment_sub_cnt(std::string topic, uint64_t const mssgID, unsig
 
 /*
  * decrement sub cnt
- * receives mssgID only
+ * receives msgID only
  */
-void Messages::decrement_sub_cnt(std::string topic, uint64_t mssgID)
+void Messages::decrement_sub_cnt(std::string topic, uint64_t msgID)
 {
     /* check if topic there or not */
     if (exists_topic(topic))
     {
-        /* check if mssgID there or not */
-        if (exists_mssg(topic, mssgID))
+        /* check if msgID there or not */
+        if (exists_mssg(topic, msgID))
         {
-            messages[topic][mssgID]--;
+            messages[topic][msgID]--;
         }
         else
         {
-            WARN_LOG("No {} mssgID for {} topic", mssgID, topic);
+            WARN_LOG("No {} msgID for {} topic", msgID, topic);
         }
     }
     else
@@ -145,25 +145,25 @@ void Messages::decrement_sub_cnt(std::string topic, uint64_t mssgID)
 }
 
 /*
- * delete this mssgID from ds as well as hdd
+ * delete this msgID from ds as well as hdd
  * only deletes when sub cnt for this mssg is zero
  */
-void Messages::delete_mssg(std::string const topic, uint64_t mssgID)
+void Messages::delete_mssg(std::string const topic, uint64_t msgID)
 {
     /* check if topic there or not */
     if (exists_topic(topic))
     {
-        /* check if mssgID there or not */
-        if (exists_mssg(topic, mssgID))
+        /* check if msgID there or not */
+        if (exists_mssg(topic, msgID))
         {
             /* only delete if sub cnt == 0 */
-            if (messages[topic][mssgID] == 0)
+            if (messages[topic][msgID] == 0)
             {
                 /* remove from ds */
-                messages[topic].erase(mssgID);
+                messages[topic].erase(msgID);
 
                 /* remove from hdd */
-                fs::path path = topics_directory + "/" + topic + "/" + std::to_string(mssgID) + ".txt";
+                fs::path path = topics_directory + "/" + topic + "/" + std::to_string(msgID) + ".txt";
 
                 if (fs::exists(path))
                 {
@@ -171,21 +171,21 @@ void Messages::delete_mssg(std::string const topic, uint64_t mssgID)
                 }
                 else
                 {
-                    WARN_LOG("Mssg in ds but not on hdd for ({}, {})", topic, mssgID);
+                    WARN_LOG("Mssg in ds but not on hdd for ({}, {})", topic, msgID);
                 }
             }
             else
             {
-                WARN_LOG("Sub cnt not zero for ({}, {})", topic, mssgID);
+                WARN_LOG("Sub cnt not zero for ({}, {})", topic, msgID);
             }
         }
         else
         {
-            WARN_LOG("Deleting non-existent ({}, {})", topic, mssgID);
+            WARN_LOG("Deleting non-existent ({}, {})", topic, msgID);
         }
     }
     else
     {
-        WARN_LOG("Deleting mssgID in non-existent topic {}", topic);
+        WARN_LOG("Deleting msgID in non-existent topic {}", topic);
     }
 }
