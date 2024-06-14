@@ -8,10 +8,8 @@ namespace fs = std::filesystem;
  * init topics_directory
  * keep it in sync with what is supplied to Topics obj
  */
-Messages::Messages(std::string const topics_directory)
+Messages::Messages(std::string const topics_directory) : topics_directory(topics_directory), uniq_id(0)
 {
-    this->topics_directory = topics_directory;
-    this->uniq_id = 0;
 }
 
 /*

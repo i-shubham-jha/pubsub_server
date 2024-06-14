@@ -6,7 +6,7 @@ int main()
 {
     INFO_LOG("Starting unit test program for topics");
 
-    Topics x("kuch_toh_ho_gaya_hai");
+    Topics x("messages_utest_topics");
 
     cout << x.get_mssg_cnt("t1") << endl;
 

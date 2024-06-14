@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::string topics_directory = "messages";
+    std::string topics_directory = "messages_utest_messages";
 
     Topics topics_ds(topics_directory);
     Messages mssg_ds(topics_directory);

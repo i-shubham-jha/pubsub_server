@@ -5,15 +5,13 @@
 namespace fs = std::filesystem;
 
 /*
- * Default constructor
+ * constructor
  * inits the topics_directory var with the directory where
  * topics and mssgs should be stored.
  * Also creates the holding directory for topics and mssgs on hdd.
  */
-Topics::Topics(std::string const topics_directory)
+Topics::Topics(std::string const topics_directory) : topics_directory(topics_directory)
 {
-    this->topics_directory = topics_directory;
-
     fs::path path = this->topics_directory;
 
     if (!fs::exists(path))
