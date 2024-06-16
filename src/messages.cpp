@@ -40,7 +40,7 @@ void Messages::new_topic(std::string const topic)
     if (!exists_topic(topic))
     {
         /* insert this topic with emtpy msgID container */
-        messages.insert({topic, {}});
+        messages[topic];
         INFO_LOG("Added new topic {}", topic);
     }
     else
