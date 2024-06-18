@@ -6,3 +6,4 @@
 #define INFO_LOG spdlog::info
 #define ERROR_LOG spdlog::error
 #define CRITIAL_LOG spdlog::critical
+#define DEBUG_LOG spdlog::debug
