@@ -17,6 +17,9 @@ add_library(topics src/topics.cpp)
 # library for messages data structure
 add_library(messages src/messages.cpp)
 
+# library for subscriptions data structure
+add_library(subscriptions src/subscriptions.cpp)
+
 # compiling test programs
 if(BUILD_TESTS)
     # u test for topics
@@ -26,4 +29,8 @@ if(BUILD_TESTS)
     # u test for messages
     add_executable(utest_messages tests/utest_messages.cpp)
     target_link_libraries(utest_messages messages topics)
+
+    # u test for subscriptions
+    add_executable(utest_subscriptions tests/utest_subscriptions.cpp)
+    target_link_libraries(utest_subscriptions subscriptions)
 endif()
