@@ -43,6 +43,6 @@ int main()
 
     for (int i : new_subs)
     {
-        std::cout << subs.subs_cnt(topic);
+        std::cout << subs.subs_cnt("stress_test");
     }
 }
