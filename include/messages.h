@@ -41,6 +41,9 @@ class Messages
     /* new message. returns msgID */
     uint64_t new_message(std::string const topic, std::string const mssg);
 
+    /* get sub cnt for this msgID */
+    unsigned get_sub_cnt(std::string topic, uint64_t msgID);
+
     /* increment sub cnt by x */
     void increment_sub_cnt(std::string topic, uint64_t const msgID, unsigned x);
 

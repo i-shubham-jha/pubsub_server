@@ -43,4 +43,16 @@ int main()
     {
         mssg_ds.delete_mssg("stress_test", i);
     }
+
+    new_test("test for get_sub_cnt function");
+    std::string const subcnt = "subcnt";
+    topics_ds.create_topic(subcnt);
+    uint64_t uuid = mssg_ds.new_message(subcnt, gen_random_str(1000));
+    std::cout << "get_sub_cnt = " << mssg_ds.get_sub_cnt(subcnt, uuid) << std::endl;
+
+    mssg_ds.decrement_sub_cnt(subcnt, uuid);
+    std::cout << "get_sub_cnt = " << mssg_ds.get_sub_cnt(subcnt, uuid) << std::endl;
+
+    mssg_ds.increment_sub_cnt(subcnt, uuid, 69);
+    std::cout << "get_sub_cnt = " << mssg_ds.get_sub_cnt(subcnt, uuid) << std::endl;
 }

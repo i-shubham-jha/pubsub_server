@@ -53,7 +53,7 @@ void Messages::new_topic(std::string const topic)
  * function to receive a new mssg published to a topic,
  * persist it on hdd, assign a uniq msgID to this mssg,
  * and return this msgID.
- * Assumes that the directory on hdd has been created
+ * Assumes that the directory for this topic on hdd has been created
  * by calling the Topics obj.
  */
 uint64_t Messages::new_message(std::string const topic, std::string const mssg)
@@ -93,6 +93,23 @@ uint64_t Messages::new_message(std::string const topic, std::string const mssg)
 }
 
 /*
+ * function to return sub cnt for supplied (topic, msgID) tuple.
+ * if topic or msgID DNE, then returns 0 with a warning.
+ */
+unsigned Messages::get_sub_cnt(std::string topic, uint64_t msgID)
+{
+    if (exists_mssg(topic, msgID))
+    {
+        return messages[topic][msgID];
+    }
+    else
+    {
+        WARN_LOG("Getting sub cnt for non-existent tuple ({}, {})", topic, msgID);
+        return 0;
+    }
+}
+
+/*
  * increment sub cnt by x
  * receives msgID only
  */
@@ -129,7 +146,14 @@ void Messages::decrement_sub_cnt(std::string topic, uint64_t msgID)
         /* check if msgID there or not */
         if (exists_mssg(topic, msgID))
         {
-            messages[topic][msgID]--;
+            if (messages[topic][msgID] > 0)
+            {
+                messages[topic][msgID]--;
+            }
+            else
+            {
+                WARN_LOG("decrementing 0 sub cnt for tuple: ({}, {})", topic, msgID);
+            }
         }
         else
         {
