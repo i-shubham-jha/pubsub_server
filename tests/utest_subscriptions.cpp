@@ -40,9 +40,4 @@ int main()
         }
         std::cout << std::endl;
     }
-
-    for (int i : new_subs)
-    {
-        std::cout << subs.subs_cnt("stress_test");
-    }
 }
