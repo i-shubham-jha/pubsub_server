@@ -10,6 +10,7 @@ project(pubsub_server VERSION 1.0)
 option(BUILD_TESTS "Build test programs" OFF)
 
 include_directories(include)
+include_directories(external/spdlog/include)
 
 # library for topics data structure
 add_library(topics src/topics.cpp)
