@@ -1,11 +1,8 @@
-#include "logger.h"
 #include "topics.h"
 #include <iostream>
 using namespace std;
 int main()
 {
-    INFO_LOG("Starting unit test program for topics");
-
     Topics x("messages_utest_topics");
 
     cout << x.get_mssg_cnt("t1") << endl;

@@ -1,9 +1,12 @@
 #pragma once
 
-#include "spdlog/spdlog.h"
+#include "spdlog/async.h"
+#include "spdlog/sinks/rotating_file_sink.h"
 
-#define WARN_LOG spdlog::warn
-#define INFO_LOG spdlog::info
-#define ERROR_LOG spdlog::error
-#define CRITIAL_LOG spdlog::critical
-#define DEBUG_LOG spdlog::debug
+extern std::shared_ptr<spdlog::logger> file_logger;
+
+#define WARN_LOG file_logger->warn
+#define INFO_LOG file_logger->info
+#define ERROR_LOG file_logger->error
+#define CRITIAL_LOG file_logger->critical
+#define DEBUG_LOG file_logger->debug

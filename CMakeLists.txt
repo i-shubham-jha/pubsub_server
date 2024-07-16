@@ -12,14 +12,21 @@ option(BUILD_TESTS "Build test programs" OFF)
 include_directories(include)
 include_directories(external/spdlog/include)
 
+# library for logger
+add_library(logger src/logger.cpp)
+
 # library for topics data structure
 add_library(topics src/topics.cpp)
+target_link_libraries(topics logger)
 
 # library for messages data structure
 add_library(messages src/messages.cpp)
+target_link_libraries(messages logger)
 
 # library for subscriptions data structure
 add_library(subscriptions src/subscriptions.cpp)
+target_link_libraries(subscriptions logger)
+
 
 # compiling test programs
 if(BUILD_TESTS)
