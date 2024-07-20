@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TOPICS_H
+#define TOPICS_H
 
 #include <string>
 #include <unordered_map>
@@ -36,3 +37,5 @@ class Topics
     /* get message count */
     unsigned get_mssg_cnt(std::string const topic);
 };
+
+#endif

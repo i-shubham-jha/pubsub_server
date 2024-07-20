@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MESSAGES_H
+#define MESSAGES_H
 
 #include <cstdint>
 #include <stdint.h>
@@ -53,3 +54,5 @@ class Messages
     /* delete this msgID */
     void delete_mssg(std::string const topic, uint64_t const msgID);
 };
+
+#endif

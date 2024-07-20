@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOGGER_H
+#define LOGGER_H
 
 #include "spdlog/async.h"
 #include "spdlog/sinks/rotating_file_sink.h"
@@ -10,3 +11,5 @@ extern std::shared_ptr<spdlog::logger> file_logger;
 #define ERROR_LOG file_logger->error
 #define CRITIAL_LOG file_logger->critical
 #define DEBUG_LOG file_logger->debug
+
+#endif

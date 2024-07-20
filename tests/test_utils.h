@@ -1,3 +1,6 @@
+#ifndef TEST_UTILS_H
+#define TEST_UTILS_H
+
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -25,3 +28,5 @@ inline std::string gen_random_str(int len)
     }
     return str;
 }
+
+#endif

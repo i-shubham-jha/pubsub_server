@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SUBSCRIPTIONS_H
+#define SUBSCRIPTIONS_H
 
 #include <cstdint>
 #include <stdint.h>
@@ -53,3 +54,5 @@ class Subscriptions
     /* clear all msgIDs from this subID */
     void clear_all_mssgs(std::string topic, uint64_t subID);
 };
+
+#endif
