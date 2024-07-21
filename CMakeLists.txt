@@ -14,6 +14,9 @@ include_directories(external/spdlog/include)
 
 # library for logger
 add_library(logger src/logger.cpp)
+if(DEBUG_BUILD)
+    target_compile_definitions(logger PRIVATE DEBUG_BUILD)
+endif()
 
 # library for topics data structure
 add_library(topics src/topics.cpp)
