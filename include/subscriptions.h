@@ -53,6 +53,9 @@ class Subscriptions
 
     /* clear all msgIDs from this subID */
     void clear_all_mssgs(std::string topic, uint64_t subID);
+
+    /* check if any sub there for topic */
+    bool exists_subs(std::string topic);
 };
 
 #endif

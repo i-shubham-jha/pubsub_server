@@ -127,3 +127,11 @@ void Subscriptions::clear_all_mssgs(std::string topic, uint64_t subID)
         subscriptions[topic][subID].clear();
     }
 }
+
+/*
+ * check if any sub there for topic or not
+ */
+bool Subscriptions::exists_subs(std::string topic)
+{
+    return ((subscriptions.find(topic) != subscriptions.end()) && (subscriptions[topic].size() > 0));
+}
