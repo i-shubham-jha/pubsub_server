@@ -2,15 +2,24 @@
 # supply external variable as "cmake -DBUILD_TESTS=ON .."
 cmake_minimum_required(VERSION 3.29)
 
+# global sets
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
 project(pubsub_server VERSION 1.0)
 
+if(DEBUG_BUILD)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+
 option(BUILD_TESTS "Build test programs" OFF)
 
+# global include directories
 include_directories(include)
 include_directories(external/spdlog/include)
+include_directories(external/Crow/include)
+include_directories(include/boost)
 
 # library for logger
 add_library(logger src/logger.cpp)
@@ -30,6 +39,10 @@ target_link_libraries(messages logger)
 add_library(subscriptions src/subscriptions.cpp)
 target_link_libraries(subscriptions logger)
 
+# main executable
+add_executable(main src/main.cpp)
+target_link_libraries(main logger topics messages subscriptions)
+target_compile_definitions(main PRIVATE CROW_USE_BOOST)
 
 # compiling test programs
 if(BUILD_TESTS)
