@@ -38,7 +38,7 @@ void Topics::create_topic(std::string const topic)
     if (!exists(topic))
     {
         /* inserting into map */
-        topics[topic];
+        topics[topic] = 0;
 
         /* creating directory for this topic */
         fs::path path = (topics_directory + "/" + topic);
