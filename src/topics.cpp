@@ -24,7 +24,7 @@ Topics::Topics(std::string const topics_directory) : topics_directory(topics_dir
 /*
  *function to find whether the given topic exists in the ds or not
  */
-inline bool Topics::exists(std::string const topic)
+bool Topics::exists(std::string const topic)
 {
     return topics.find(topic) != topics.end();
 }

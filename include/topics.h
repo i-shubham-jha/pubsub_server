@@ -20,7 +20,7 @@ class Topics
     Topics(std::string const topics_directory);
 
     /* checks if a topic there or not */
-    inline bool exists(std::string const topic);
+    bool exists(std::string const topic);
 
     /* create a new topic */
     void create_topic(std::string const topic);
