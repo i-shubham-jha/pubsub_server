@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 /* for brevity */
 #define umm std::unordered_map
@@ -19,7 +20,7 @@
 
 class Subscriptions
 {
-    umm<std::string, umm<uint64_t, uss<uint64_t>>> subscriptions;
+    umm<std::string, umm<uint64_t, std::vector<uint64_t>>> subscriptions;
 
     /*
      * used to gen uniq subID for each subscription.
@@ -49,7 +50,7 @@ class Subscriptions
     void add_msg_id(std::string topic, uint64_t msgID);
 
     /* get all msgIDs of messages to be delivered to this subID */
-    uss<uint64_t> get_mssg_ids(std::string topic, uint64_t subID);
+    std::vector<uint64_t> get_mssg_ids(std::string topic, uint64_t subID);
 
     /* clear all msgIDs from this subID */
     void clear_all_mssgs(std::string topic, uint64_t subID);

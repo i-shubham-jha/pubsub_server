@@ -82,7 +82,7 @@ void Subscriptions::add_msg_id(std::string topic, uint64_t msgID)
     {
         for (auto &p : subscriptions[topic])
         {
-            p.second.insert(msgID);
+            p.second.push_back(msgID);
         }
     }
 }
@@ -91,7 +91,7 @@ void Subscriptions::add_msg_id(std::string topic, uint64_t msgID)
  * get all msgIDs of messages to be delivered to this subID
  * Returns zero if topic/subID absent.
  */
-uss<uint64_t> Subscriptions::get_mssg_ids(std::string topic, uint64_t subID)
+std::vector<uint64_t> Subscriptions::get_mssg_ids(std::string topic, uint64_t subID)
 {
     if (!exists_topic(topic))
     {

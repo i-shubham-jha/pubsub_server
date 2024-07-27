@@ -107,7 +107,7 @@ int main()
     ([&mssgs_ds, &subs_ds](crow::response &res, std::string topic_arg, uint64_t sub_id_arg) {
         /* getting and clearing the message ids for this sub */
         subs_mtx.lock();
-        std::unordered_set<uint64_t> mssg_ids = subs_ds.get_mssg_ids(topic_arg, sub_id_arg);
+        std::vector<uint64_t> mssg_ids = subs_ds.get_mssg_ids(topic_arg, sub_id_arg);
         subs_ds.clear_all_mssgs(topic_arg, sub_id_arg);
         subs_mtx.unlock();
 
