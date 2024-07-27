@@ -23,9 +23,9 @@ unsigned const PORT = 3000;
 int main()
 {
     /* helper objects */
-    static Topics topics_ds(topics_directory);
-    static Messages mssgs_ds(topics_directory);
-    static Subscriptions subs_ds;
+    Topics topics_ds(topics_directory);
+    Messages mssgs_ds(topics_directory);
+    Subscriptions subs_ds;
 
     /* mutex objects */
     static std::mutex topics_mtx;
@@ -40,55 +40,56 @@ int main()
 
     /* ROUTE for new message */
     CROW_ROUTE(app, "/new_message/<string>/<string>")
-        .methods(crow::HTTPMethod::POST)([](std::string topic_arg, std::string message_arg) {
-            /* if no sub for this topic, ignore this message */
-            bool sub_present = true;
+        .methods(crow::HTTPMethod::POST)(
+            [&topics_ds, &mssgs_ds, &subs_ds](std::string topic_arg, std::string message_arg) {
+                /* if no sub for this topic, ignore this message */
+                bool sub_present = true;
 
-            subs_mtx.lock();
-            sub_present = subs_ds.exists_subs(topic_arg);
-            subs_mtx.unlock();
+                subs_mtx.lock();
+                sub_present = subs_ds.exists_subs(topic_arg);
+                subs_mtx.unlock();
 
-            if (!sub_present)
-            {
-                /* no sub, no need to persist this mssg */
+                if (!sub_present)
+                {
+                    /* no sub, no need to persist this mssg */
+                    return "Successful reception of message";
+                }
+
+                /* sub exists for this topic */
+
+                /* incrementing message count for this topic */
+                topics_mtx.lock();
+
+                if (!topics_ds.exists(topic_arg))
+                {
+                    topics_ds.create_topic(topic_arg);
+                }
+
+                topics_ds.increment_mssg_cnt(topic_arg);
+
+                topics_mtx.unlock();
+
+                /* creating new message */
+                mssgs_mtx.lock();
+                uint64_t mssgID = mssgs_ds.new_message(topic_arg, message_arg);
+                mssgs_mtx.unlock();
+
+                /* adding this message to all subs for this topic */
+                subs_mtx.lock();
+                subs_ds.add_msg_id(topic_arg, mssgID);
+                uint64_t subs_cnt = subs_ds.subs_cnt(topic_arg);
+                subs_mtx.unlock();
+
+                /* message needs to be delivered to these messages also */
+                mssgs_mtx.lock();
+                mssgs_ds.increment_sub_cnt(topic_arg, mssgID, subs_cnt);
+                mssgs_mtx.unlock();
+
                 return "Successful reception of message";
-            }
-
-            /* sub exists for this topic */
-
-            /* incrementing message count for this topic */
-            topics_mtx.lock();
-
-            if (!topics_ds.exists(topic_arg))
-            {
-                topics_ds.create_topic(topic_arg);
-            }
-
-            topics_ds.increment_mssg_cnt(topic_arg);
-
-            topics_mtx.unlock();
-
-            /* creating new message */
-            mssgs_mtx.lock();
-            uint64_t mssgID = mssgs_ds.new_message(topic_arg, message_arg);
-            mssgs_mtx.unlock();
-
-            /* adding this message to all subs for this topic */
-            subs_mtx.lock();
-            subs_ds.add_msg_id(topic_arg, mssgID);
-            uint64_t subs_cnt = subs_ds.subs_cnt(topic_arg);
-            subs_mtx.unlock();
-
-            /* message needs to be delivered to these messages also */
-            mssgs_mtx.lock();
-            mssgs_ds.increment_sub_cnt(topic_arg, mssgID, subs_cnt);
-            mssgs_mtx.unlock();
-
-            return "Successful reception of message";
-        });
+            });
 
     /* route for new sub request */
-    CROW_ROUTE(app, "/new_sub/<string>").methods(crow::HTTPMethod::POST)([](std::string topic_arg) {
+    CROW_ROUTE(app, "/new_sub/<string>").methods(crow::HTTPMethod::POST)([&subs_ds](std::string topic_arg) {
         crow::json::wvalue res;
 
         /* create new sub and subID */
@@ -103,7 +104,7 @@ int main()
 
     /* route for new pull request */
     CROW_ROUTE(app, "/get_messages/<string>/<uint>")
-    ([](crow::response &res, std::string topic_arg, uint64_t sub_id_arg) {
+    ([&mssgs_ds, &subs_ds](crow::response &res, std::string topic_arg, uint64_t sub_id_arg) {
         /* getting and clearing the message ids for this sub */
         subs_mtx.lock();
         std::unordered_set<uint64_t> mssg_ids = subs_ds.get_mssg_ids(topic_arg, sub_id_arg);
