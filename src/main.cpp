@@ -148,6 +148,8 @@ int main()
             {
                 ERROR_LOG("Unable to open file for response: {}", path + "/" + std::to_string(msg_id) + ".txt");
             }
+
+            fin.close();
         }
 
         res.set_header("Content-Type", "application/json");
